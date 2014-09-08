@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!-- START Facebook OpenGraph -->
+    <meta property="og:title" content="Conception Connection"/>
+    <meta property="og:site_name" content="Conception Connection"/>
+    <meta property="og:url" content="http://conception-connection.cf"/>
+    <meta property="og:description" content="Find out waht motivated your parents."/>
+    <meta property="og:image" content="http://conception-connection.cf/preview.png"/>
+    <!-- END Facebook OpenGraph -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>CC</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="wiki_event.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      fetchEvent(new Date(1945,08,02),3, function(events){
+        $(events).each(function(index){
+          console.log('RESULT', this.date, '|', this.description);
+        });
+      });
+    </script>
+  </body>
+</html>
