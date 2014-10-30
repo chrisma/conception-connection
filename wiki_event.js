@@ -1,17 +1,16 @@
-var fetchEvent = function(date, variance, callback) {
+// Helpers
+var monthNames = [ "January", "February", "March", "April", "May", "June",
+"July", "August", "September", "October", "November", "December" ];
+function constructWikiTitle(d) {
+	return monthNames[d.getMonth()] + '_' + d.getDate();
+}
+function addDays(date, days) {
+	var result = new Date(date);
+	result.setDate(date.getDate() + days);
+	return result;
+}
 
-	// Helpers
-	var monthNames = [ "January", "February", "March", "April", "May", "June",
-	"July", "August", "September", "October", "November", "December" ];
-	function constructWikiTitle(d) {
-		return monthNames[d.getMonth()] + '_' + d.getDate();
-	}
-	function addDays(date, days) {
-		var result = new Date(date);
-		result.setDate(date.getDate() + days);
-		return result;
-	}
-
+var fetchEvents = function(date, variance, callback) {
 	// Construct Wikipedia article titles
 	var titles = [];
 	titles.push(constructWikiTitle(date));

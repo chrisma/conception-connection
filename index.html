@@ -17,9 +17,20 @@
   </head>
   <body>
     <script type="text/javascript">
-      fetchEvent(new Date(1945,08,02),3, function(events){
+      var birthday = new Date(1989,11,02);
+      var conception = addDays(birthday, -266);
+
+      fetchEvents(conception,7, function(events){
+        events.sort(function(a,b){
+          function dateDistance(element){
+            return Math.abs(element.date - conception);
+          }
+          if ( dateDistance(a) < dateDistance(b) ) return -1;
+          if ( dateDistance(a) > dateDistance(b) ) return 1;
+          return 0; // a must be equal to b
+        });
         $(events).each(function(index){
-          console.log('RESULT', this.date, '|', this.description);
+          console.log('SORTED RESULT', this.date, '|', this.description);
         });
       });
     </script>
