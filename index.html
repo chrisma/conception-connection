@@ -103,6 +103,8 @@
         return date
       }
 
+      var variance = parseInt(hashParm('variance')) || 7;
+
       if ( location.hash ) {
         var paramDay = new Date(Date.parse(hashParm('birthday')))
         $('#year').val(paramDay.getFullYear());
@@ -111,7 +113,6 @@
         run();
       }
 
-      var variance = parseInt(hashParm('variance')) || 7
 
       $('#button').click(function() {
         run();
@@ -128,9 +129,12 @@
         $('#loader').show();
 
         var conception = addDays(bday, -266);
-        console.log(conception);
         fetchEvents(conception, variance, function(events){
           $('#loader').hide();
+          if ( !events.length ) {
+            $('#no_event_in_range').show();
+            return
+          } 
           $('#event').text(events[0].description);
           $('#result').show();
         });
