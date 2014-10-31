@@ -20,13 +20,6 @@ body {
 	text-align: center;
 }
 
-img.github {
-	position: absolute;
-	top: 0;
-	right: 0;
-	border: 0;
-}
-
 p.small {
 	font-size: 12px;
 	color: #6E6E6E;
@@ -46,14 +39,6 @@ input.input-mini {
 
 input.input-small {
     width: 40px;
-}
-
-form {
-	margin-top: 0px;
-	margin-right: auto;
-	margin-bottom: 10px;
-	margin-left: auto;
-	text-align:center;
 }
 
 .help-inline {
@@ -76,7 +61,7 @@ div.event {
 h1 {
 	font-family: 'Patrick Hand SC';
 	font-weight: bold;
-	font-size: 14pt;
+	font-size: 16pt;
 	padding: 0px;
 	text-transform:uppercase;
 }
@@ -89,31 +74,4 @@ div.well {
 
 span#event_date {
 	font-weight: bold;
-}
-
-div.aboutcontent {
-	width: 580px;
-	text-align: left;
-	margin: 0 auto;
-}
-
-.aboutcontent li {
-	margin-bottom: 10px;
-}
-
-ul.socialmedia li{
-    list-style-type: none;
-    display: inline-block;
-    vertical-align: top;
-}
-
-ul.socialmedia{
-	text-align: left;
-	margin: 0 0 0 0;
-}
-
-/*Needed for older versions of Firefox*/
-.fb-like span, .fb-like iframe {
-	height:25px !important;
-	width:150px !important
 }

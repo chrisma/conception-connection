@@ -49,6 +49,14 @@ var fetchEvents = function(date, variance, callback) {
 				});
 			}
 		}
+		result.sort(function(a,b){
+			function dateDistance(element){
+				return Math.abs(element.date - date);
+			}
+			if ( dateDistance(a) < dateDistance(b) ) return -1;
+			if ( dateDistance(a) > dateDistance(b) ) return 1;
+			return 0; // a must be equal to b
+		});
 		callback(result);
 	});
 
