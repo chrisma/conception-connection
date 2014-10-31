@@ -6,33 +6,94 @@
     <meta property="og:title" content="Conception Connection"/>
     <meta property="og:site_name" content="Conception Connection"/>
     <meta property="og:url" content="http://conception-connection.cf"/>
-    <meta property="og:description" content="Find out waht motivated your parents."/>
+    <meta property="og:description" content="Find out what event led to your conception. An implementation of a webcomic." />
     <meta property="og:image" content="http://conception-connection.cf/preview.png"/>
     <!-- END Facebook OpenGraph -->
+    <meta name="viewport" content="width=device-width">
+    <title>Conception Connection</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>CC</title>
+    <link rel="stylesheet" href="bootstrap.2.3.1.min.css" media="screen">
+    <link rel="stylesheet" href="style.css">
+    <link href='http://fonts.googleapis.com/css?family=Patrick+Hand+SC' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="wiki_event.js"></script>
   </head>
   <body>
-    <script type="text/javascript">
-      var birthday = new Date(1989,11,02);
-      var conception = addDays(birthday, -266);
+    <div class="content">
+      <div class="element">
+        <a href="/"><img src="frame.png"></a>
+        <span>Conception Connection | implementing the <a href="http://www.smbc-comics.com/?id=2922" target="_blank">SMBC comic</a> of March 21, 2013 | <a href="about">about</a></span>
+      </div>
 
-      fetchEvents(conception,7, function(events){
-        events.sort(function(a,b){
-          function dateDistance(element){
-            return Math.abs(element.date - conception);
-          }
-          if ( dateDistance(a) < dateDistance(b) ) return -1;
-          if ( dateDistance(a) > dateDistance(b) ) return 1;
-          return 0; // a must be equal to b
-        });
-        $(events).each(function(index){
-          console.log('SORTED RESULT', this.date, '|', this.description);
-        });
-      });
+      <div class="element" id="formDiv">
+        <h1>Your date of birth:</h1>
+        <form class="dateform" action="/" method="post" class="form-inline">
+          <div class="input-append">
+            <input name="day" class="input-mini" id="appendedInput" type="text" value="" maxlength="2">
+            <span class="add-on">day</span>
+          </div>
+          <div class="input-append">
+            <input name="month" class="input-mini" id="appendedInput" type="text" value="" maxlength="2">
+            <span class="add-on">month</span>
+          </div>
+          <div class="input-append">
+            <input name="year" class="input-small" id="appendedInput" type="text" value="" maxlength="4">
+            <span class="add-on">year</span>
+          </div>
+          <div class="hidden">
+            <input name="range_from" type="text" value="0">
+            <input name="range_to" type="text" value="8">
+          </div>
+            <input type="submit" value="Calculate" class="btn">
+            <div class="control-group error hidden" id="errorDiv">
+              <span class="help-inline"></span>
+            </div>
+        </form>
+      </div>
+
+      <div class="element hidden" id="no_event_in_range">
+        <h1>Sorry, no important historical event could be found within <span class="weeks"></span> week(s) of conception.</h1>
+        <form class="dateform" action="/" method="post">
+          <div class="hidden">
+            <input name="day" type="text" value="">
+            <input name="month" type="text" value="">
+            <input name="year" type="text" value="">
+            <input name="range_from" type="text" value="">
+            <input name="range_to" type="text" value="">
+          </div>
+          <input class="btn btn-link" type="submit" value="Try again with more variance." />
+        </form>
+      </div>
+      
+      <div class="element hidden" id="result">
+        <h1>Most likely historical event that aroused your parents:</h1>
+        <div class="well">
+          <span id="event"></span>
+        </div>
+        <p class="small">Assuming a normal 38 (+/-<span class="weeks"></span>) week pregnancy. Day of conception: <span id="event_date"></span>.</p>
+      </div>
+
+    </div>
+
+    <script type="text/javascript">
+      // var birthday = new Date(1989,11,02);
+      // var conception = addDays(birthday, -266);
+
+      // fetchEvents(conception,7, function(events){
+      //   events.sort(function(a,b){
+      //     function dateDistance(element){
+      //       return Math.abs(element.date - conception);
+      //     }
+      //     if ( dateDistance(a) < dateDistance(b) ) return -1;
+      //     if ( dateDistance(a) > dateDistance(b) ) return 1;
+      //     return 0; // a must be equal to b
+      //   });
+      //   $(events).each(function(index){
+      //     console.log('SORTED RESULT', this.date, '|', this.description);
+      //   });
+      // });
     </script>
   </body>
 </html>
