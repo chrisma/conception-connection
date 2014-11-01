@@ -1,5 +1,20 @@
+html {
+	position: relative;
+	min-height: 100%;
+}
+
 body {
+	margin: 0 0 20px; /* bottom = footer height */
 	background-image: url('knitting250px.png');
+}
+
+footer {
+	position: absolute;
+	left: 0;
+	bottom: 3px;
+	height: 20px;
+	width: 100%;
+	font-size: 15px;
 }
 
 .content {
@@ -34,11 +49,11 @@ p.small {
 }
 
 input.input-mini {
-    width: 20px;
+	width: 20px;
 }
 
 input.input-small {
-    width: 40px;
+	width: 40px;
 }
 
 .hidden{
