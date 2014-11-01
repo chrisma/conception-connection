@@ -49,6 +49,7 @@ var fetchEvents = function(date, variance, callback) {
 				});
 			}
 		}
+		// Sort by proximity to requested date
 		result.sort(function(a,b){
 			function dateDistance(element){
 				return Math.abs(element.date - date);

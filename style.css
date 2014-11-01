@@ -41,10 +41,6 @@ input.input-small {
     width: 40px;
 }
 
-.help-inline {
-	padding-left: 0px;
-}
-
 .hidden{
 	display: none;
 }
@@ -55,7 +51,6 @@ input.input-small {
 
 div.event {
 	font-size: 16pt;
-	font-family: sans-serif;
 }
 
 h1 {
@@ -87,5 +82,10 @@ div.well {
 }
 
 #loader div {
+	margin-bottom: 20px;
+}
+
+a#retry {
+	margin-top: 20px;
 	margin-bottom: 20px;
 }

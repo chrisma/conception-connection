@@ -53,17 +53,8 @@
       </div>
 
       <div class="element hidden" id="no_events">
-        <h1>Sorry, no important historical event could be found within <span class="weeks"></span> week(s) of conception.</h1>
-        <form class="dateform" action="/" method="post">
-          <div class="hidden">
-            <input name="day" type="text" value="">
-            <input name="month" type="text" value="">
-            <input name="year" type="text" value="">
-            <input name="range_from" type="text" value="">
-            <input name="range_to" type="text" value="">
-          </div>
-          <input class="btn btn-link" type="submit" value="Try again with more variance." />
-        </form>
+        <h1>Couldn't find the event that aroused your parents!<br>(at least not within <span class="variance"></span> days of conception).</h1>
+        <a class="btn" id="retry" href="">Try again (with more variance)</a>
       </div>
       
       <div class="element hidden" id="result">
@@ -71,7 +62,7 @@
         <div class="well">
           <span id="event"></span>
         </div>
-        <p class="small">Assuming a 38 week (+/- <span id="variance"></span> days) pregnancy. Day of conception: <span class="bold" id="event_date"></span>.</p>
+        <p class="small">Assuming a 38 week (+/- <span class="variance"></span> days) pregnancy. Day of conception: <span class="bold" id="event_date"></span>.</p>
       </div>
 
     </div>
@@ -96,6 +87,10 @@
           if (e.which == 13) { //Enter
             run(variance);
           }
+        });
+
+        $(window).on('hashchange',function(){ 
+          window.location.reload(true); 
         });
       });
 
@@ -132,13 +127,17 @@
 
         fetchEvents(conception, variance, function(events){
           $('#loader').hide();
+          $('.variance').text(variance);
           if ( !events.length ) {
+            var href = '#birthday=' + bday.getFullYear() + '-' +
+              (bday.getMonth()+1) + '-' + bday.getDate() + 
+              '&variance=' + (variance + 3);
+            $('#retry').attr('href', href)
             $('#no_events').show();
             return
           } 
           $('#event').text(events[0].description);
           $('#event_date').text(events[0].date.toDateString());
-          $('#variance').text(variance);
           $('#result').show();
         });
       }
