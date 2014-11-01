@@ -70,7 +70,7 @@
         <div class="well">
           <span id="event"></span>
         </div>
-        <p class="small">Assuming a normal 38 (+/-<span class="weeks"></span>) week pregnancy. Day of conception: <span id="event_date"></span>.</p>
+        <p class="small">Assuming a 38 week (+/- <span id="variance"></span> days) pregnancy. Day of conception: <span id="event_date"></span>.</p>
       </div>
 
     </div>
@@ -142,6 +142,9 @@
             return
           } 
           $('#event').text(events[0].description);
+          console.log('VARIANCE', variance);
+          $('#variance').text(variance);
+          $('#event_date').text(conception.toDateString());
           $('#result').show();
         });
       }
