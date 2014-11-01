@@ -42,8 +42,8 @@
             <span class="add-on">year</span>
           </div>
           <button class="btn" id="button">Calculate</button>
-          <div class="hidden" id="errorDiv">
-            <span class="help-inline">Please enter a valid date.</span>
+          <div class="hidden" id="date_error">
+            <span>Please enter a valid date.</span>
           </div>
       </div>
       
@@ -118,11 +118,17 @@
         run();
       });
 
+      $("#input_div input").keypress(function (e) {
+        if (e.which == 13) { //Enter
+          run();
+        }
+      });
+
       function run(){
+        $('#date_error').hide();
         var bday = validDate();
         if ( !validDate(bday) ) {
-          // showInvalidDateError();
-          console.log("INVALID DATE");
+          $('#date_error').show();
           return
         }
         $('#input_div').hide();

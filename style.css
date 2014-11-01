@@ -66,12 +66,11 @@ h1 {
 	text-transform:uppercase;
 }
 
-div.well {
-	font-size: 13pt;
-	padding: 30px;
-	margin-bottom: 0px;
-}
-
 span#event_date {
 	font-weight: bold;
+}
+
+div#date_error {
+	font-weight: bold;
+	color: #B40404;
 }
