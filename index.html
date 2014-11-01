@@ -49,9 +49,10 @@
       
       <div class="element hidden" id="loader">
         <img src="loader.gif">
+        <div>Querying events for <span class="bold" id="birthday"></span>&hellip;</div>
       </div>
 
-      <div class="element hidden" id="no_event_in_range">
+      <div class="element hidden" id="no_events">
         <h1>Sorry, no important historical event could be found within <span class="weeks"></span> week(s) of conception.</h1>
         <form class="dateform" action="/" method="post">
           <div class="hidden">
@@ -70,13 +71,35 @@
         <div class="well">
           <span id="event"></span>
         </div>
-        <p class="small">Assuming a 38 week (+/- <span id="variance"></span> days) pregnancy. Day of conception: <span id="event_date"></span>.</p>
+        <p class="small">Assuming a 38 week (+/- <span id="variance"></span> days) pregnancy. Day of conception: <span class="bold" id="event_date"></span>.</p>
       </div>
 
     </div>
 
     <script type="text/javascript">
-      function hashParm(parmName) {
+      $(document).ready(function(){
+        var variance = parseInt(hashParameter('variance')) || 7;
+
+        if ( location.hash ) {
+          var birthday = new Date(Date.parse(hashParameter('birthday')))
+          $('#year').val(birthday.getFullYear());
+          $('#month').val(birthday.getMonth()+1);
+          $('#day').val(birthday.getDate());
+          run(variance);
+        }
+
+        $('#button').click(function() {
+          run(variance);
+        });
+
+        $("#input_div input").keypress(function (e) {
+          if (e.which == 13) { //Enter
+            run(variance);
+          }
+        });
+      });
+
+      function hashParameter(parmName) {
           // assumes parmŃame doesn't contain regex characters
           var re = new RegExp("#.*" + parmName + "=([^&]+)(&|$)");
           var match = location.hash.match(re);
@@ -84,47 +107,18 @@
       }
 
       function validDate() {
-        var emptyFields = $("#input_div input").filter(function(){
-          return $(this).val().trim() === "";
-        })
-        if ( emptyFields.length ) return false;
-
         var year = $('#year').val();
         var month = $('#month').val()-1;
         var day = $('#day').val();
-
         var date = new Date(year,month,day);
         if ( date == "Invalid Date" ) return false;
-
         if ( year != date.getFullYear()) return false;
         if ( month != date.getMonth()) return false;
         if ( day != date.getDate()) return false;
-
         return date
       }
 
-      var variance = parseInt(hashParm('variance')) || 7;
-
-      if ( location.hash ) {
-        var paramDay = new Date(Date.parse(hashParm('birthday')))
-        $('#year').val(paramDay.getFullYear());
-        $('#month').val(paramDay.getMonth()+1);
-        $('#day').val(paramDay.getDate());
-        run();
-      }
-
-
-      $('#button').click(function() {
-        run();
-      });
-
-      $("#input_div input").keypress(function (e) {
-        if (e.which == 13) { //Enter
-          run();
-        }
-      });
-
-      function run(){
+      function run(variance){
         $('#date_error').hide();
         var bday = validDate();
         if ( !validDate(bday) ) {
@@ -132,19 +126,19 @@
           return
         }
         $('#input_div').hide();
+        var conception = addDays(bday, - (38*7));
+        $('#birthday').text(bday.toDateString());
         $('#loader').show();
 
-        var conception = addDays(bday, -266);
         fetchEvents(conception, variance, function(events){
           $('#loader').hide();
           if ( !events.length ) {
-            $('#no_event_in_range').show();
+            $('#no_events').show();
             return
           } 
           $('#event').text(events[0].description);
-          console.log('VARIANCE', variance);
+          $('#event_date').text(events[0].date.toDateString());
           $('#variance').text(variance);
-          $('#event_date').text(conception.toDateString());
           $('#result').show();
         });
       }
