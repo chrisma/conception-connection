@@ -18,7 +18,7 @@ footer {
 }
 
 .content {
-	width: 670px;
+	width: 750px;
 	margin: 0 auto;
 	margin-top: 15px;
 	margin-bottom: 30px;
@@ -71,9 +71,22 @@ div.event {
 h1 {
 	font-family: 'Patrick Hand SC';
 	font-weight: bold;
-	font-size: 16pt;
+	font-size: 20pt;
 	padding: 0px;
 	text-transform:uppercase;
+}
+
+#inputs h1 {
+	font-size: 25pt;
+}
+
+#result h1 {
+	font-size: 22pt;
+}
+
+#inputs {
+	padding-top: 20px;
+	height: 130px;
 }
 
 .bold {
@@ -86,9 +99,10 @@ div#date_error {
 }
 
 div.well {
-	font-size: 13pt;
+	font-size: 15pt;
 	padding: 30px;
 	margin-bottom: 0px;
+	line-height: normal;
 }
 
 #loader img {

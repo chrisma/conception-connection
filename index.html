@@ -27,24 +27,24 @@
         <span>Conception Connection | implementing a <a href="http://www.smbc-comics.com/?id=2922" target="_blank">SMBC comic</a> by <a href="https://twitter.com/zachweiner">Zach Weiner</a></span>
       </div>
 
-      <div class="element" id="input_div">
+      <div class="element" id="inputs">
         <h1>Your date of birth:</h1>
-          <div class="input-append">
-            <input class="input-mini" id="day" type="text" maxlength="2">
-            <span class="add-on">day</span>
-          </div>
-          <div class="input-append">
-            <input class="input-mini" id="month" type="text" maxlength="2">
-            <span class="add-on">month</span>
-          </div>
-          <div class="input-append">
-            <input class="input-small" id="year" type="text" maxlength="4">
-            <span class="add-on">year</span>
-          </div>
-          <button class="btn" id="button">Calculate</button>
-          <div class="hidden" id="date_error">
-            <span>Please enter a valid date.</span>
-          </div>
+        <div class="input-append">
+          <input class="input-mini" id="day" type="text" maxlength="2">
+          <span class="add-on">day</span>
+        </div>
+        <div class="input-append">
+          <input class="input-mini" id="month" type="text" maxlength="2">
+          <span class="add-on">month</span>
+        </div>
+        <div class="input-append">
+          <input class="input-small" id="year" type="text" maxlength="4">
+          <span class="add-on">year</span>
+        </div>
+        <button class="btn" id="button">Calculate</button>
+        <div class="hidden" id="date_error">
+          <span>Please enter a valid date.</span>
+        </div>
       </div>
       
       <div class="element hidden" id="loader">
@@ -84,7 +84,7 @@
           run(variance);
         });
 
-        $("#input_div input").keypress(function (e) {
+        $("#inputs input").keypress(function (e) {
           if (e.which == 13) { //Enter
             run(variance);
           }
@@ -121,7 +121,7 @@
           $('#date_error').show();
           return
         }
-        $('#input_div').hide();
+        $('#inputs').hide();
         var conception = addDays(bday, - (38*7));
         $('#birthday').text(bday.toDateString());
         $('#loader').show();
