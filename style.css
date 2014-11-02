@@ -105,9 +105,15 @@ div.well {
 	line-height: normal;
 }
 
+div#loader {
+	height: 140px;
+	font-size: 12pt;
+}
+
 #loader img {
 	margin-top: 20px;
 	margin-bottom: 10px;
+	padding-top: 35px;
 }
 
 #loader div {
